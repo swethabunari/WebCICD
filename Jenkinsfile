@@ -41,6 +41,7 @@ pipeline {
     
       stage ('Deploy-To-Tomcat') {
             steps {
+                sh 'sudo su'
                 sh 'chmod 777 /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war'
                 sh  'cp -r WebApp.war /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/ /opt/apache-tomcat-8.5.66/webapps'  
                 sh 'chmod 777 /opt/apache-tomcat-8.5.66/webapps/WebApp.war'
