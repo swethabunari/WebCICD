@@ -41,7 +41,7 @@ pipeline {
     
       stage ('Deploy-To-Tomcat') {
             steps {
-                sh  'cp WebApp.war /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/ /opt/tomcat/apache-tomcat-9.0.46/webapps/'                                               
+                sh  'cp WebApp.war /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/ /opt/apache-tomcat-8.5.66/webapps'                                               
            }       
     }
     
