@@ -21,7 +21,7 @@ pipeline {
       stage ('Deploy-To-Apache') {
             steps { 
               sshagent (credentials: ['devuser']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l DEVSECOPS-UBLNX1 10.109.137.24 uname -devuser'
+                sh 'ssh -o StrictHostKeyChecking=no -l DEVSECOPS-UBLNX1@10.109.137.24 uname -devuser'
                
               } 
            }       
