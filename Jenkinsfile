@@ -18,13 +18,14 @@ pipeline {
        }
     }
     
+     
+    sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.1.106 uname -a'
+    
       stage ('Deploy-To-Tomcat') {
             steps { 
-              withCredentials(['devuser']) {
-                sh 'chmod 777 /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war'
-                sh 'cp -r WebApp.war /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/ /opt/apache-tomcat-8.5.66/webapps'  
-                sh 'chmod 777 /opt/apache-tomcat-8.5.66/webapps/WebApp.war'
-                sh 'unzip /opt/apache-tomcat-8.5.66/webapps/WebApp.war'
+              sshagent (credentials: ['devuser']) {
+                sh 'ssh -o StrictHostKeyChecking=no -l DEVSECOPS-UBLNX1 10.109.137.24 uname -devuser'
+               
               } 
            }       
          }
