@@ -17,11 +17,8 @@ pipeline {
       sh 'mvn clean package'
        }
     }
-    
-     
-    sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.1.106 uname -a'
-    
-      stage ('Deploy-To-Tomcat') {
+        
+      stage ('Deploy-To-Apache') {
             steps { 
               sshagent (credentials: ['devuser']) {
                 sh 'ssh -o StrictHostKeyChecking=no -l DEVSECOPS-UBLNX1 10.109.137.24 uname -devuser'
