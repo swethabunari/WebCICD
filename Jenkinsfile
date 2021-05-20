@@ -18,14 +18,14 @@ pipeline {
        }
     }
         
-      stage ('Deploy-To-Apache') {
-            steps { 
-              sshagent (credentials: ['devuser']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l DEVSECOPS-UBLNX1@10.109.137.24 uname -devuser'
-               
-              } 
+     stage ('Deploy-To-Apache') {
+            steps {
+           sshagent(['devuser']) {
+                sh 'scp -o StrictHostKeyChecking=no target/*.war devuser@10.109.137.24:/opt/apache-tomcat-8.5.66/webapps/webapp.war'
+              }      
            }       
-         }
+    }
+    
     
    }
     
