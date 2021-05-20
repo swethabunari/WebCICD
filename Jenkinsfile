@@ -22,7 +22,8 @@ pipeline {
             steps {
                 sh 'chmod +777 /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war' 
                 sh 'unzip /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war'
-                sh 'chmod +777 WebApp'
+                sh 'y'
+                sh 'chmod +777 /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp'
                 sh 'cp -r  /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp  /opt/apache-tomcat-8.5.66/webapps' 
                 sh 'ls /opt/apache-tomcat-8.5.66/webapps'
            }       
