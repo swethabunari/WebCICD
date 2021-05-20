@@ -20,9 +20,10 @@ pipeline {
         
      stage ('Deploy-To-Apache') {
             steps {
-                sh 'chmod 777 /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war'  
-                sh 'cp -R WebApp.war /var/lib/jenkins/workspace/webapp-cicd-pipeline/target /opt/apache-tomcat-8.5.66/webapps' 
-                sh 'unzip /opt/apache-tomcat-8.5.66/webapps/WebApp.war'
+                sh 'chmod +777 /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war' 
+                sh 'unzip /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp.war
+                sh 'chmod +777 WebApp'
+                sh 'cp -r  /var/lib/jenkins/workspace/webapp-cicd-pipeline/target/WebApp  /opt/apache-tomcat-8.5.66/webapps' 
                 sh 'ls /opt/apache-tomcat-8.5.66/webapps'
            }       
     }
