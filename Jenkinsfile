@@ -12,11 +12,7 @@ pipeline {
             ''' 
       }
     }
-    stage ('Build') {
-      steps {
-      sh 'mvn clean package'
-       }
-    }
+ 
     
     
     stage ('Source Composition Analysis') {
@@ -39,6 +35,11 @@ pipeline {
       }
     }
     
+    stage ('Build') {
+      steps {
+      sh 'mvn clean package'
+       }
+    }
         
      stage ('Deploy-To-Apache') {
             steps {
