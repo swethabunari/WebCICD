@@ -28,7 +28,7 @@ pipeline {
          sh 'chmod +x owasp-dependency-check.sh'
          sh 'bash owasp-dependency-check.sh'
          sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
-         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: '/var/lib/jenkins/OWASP-Dependency-Check/reports/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: '/var/lib/jenkins/jobs/CICD/htmlreports/HTML_20Report/', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
         
       }
     }
