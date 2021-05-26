@@ -53,6 +53,8 @@ pipeline {
                 sh 'chmod +777 /var/lib/jenkins/workspace/CICD/target/WebApp'
                 sh 'sudo cp -r /var/lib/jenkins/workspace/CICD/target/WebApp /opt/apache-tomcat-8.5.66/webapps' 
                 sh 'ls /opt/apache-tomcat-8.5.66/webapps'
+                sh 'sudo cp -r /var/lib/jenkins/OWASP-Dependency-Check/reports /opt/apache-tomcat-8.5.66/webapps'
+                
            }       
     }
     
