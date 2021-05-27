@@ -6,14 +6,13 @@ pipeline {
   stages {
     stage ('Initialize') {
       steps {
-        sh '''
+        sh 
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-            ''' 
-      }
+         }
+    }
       
-      
-       stage ('Check-Git-Secrets') {
+     stage ('Check-Git-Secrets') {
       steps {
         sh 'rm trufflehog || true'
         sh 'docker run gesellix/trufflehog --json https://github.com/securitis/CICD.git > trufflehog'
@@ -21,11 +20,6 @@ pipeline {
       }
     }
       
-        
-      
-    }
- 
-  
     stage ('Source Composition Analysis') {
       steps {
          sh 'rm owasp* || true'
@@ -38,7 +32,7 @@ pipeline {
       }
     }
     
-       stage ('SAST') {
+     stage ('SAST') {
       steps {
         withSonarQubeEnv('sonar') {
           sh 'mvn sonar:sonar'
@@ -53,7 +47,7 @@ pipeline {
        }
     }
         
-     stage ('Deploy-To-Apache') {
+    stage ('Deploy-To-Apache') {
             steps {
                 sh 'chmod +777 /var/lib/jenkins/workspace/CICD/target/WebApp'
                 sh 'sudo cp -r /var/lib/jenkins/workspace/CICD/target/WebApp /opt/apache-tomcat-8.5.66/webapps' 
