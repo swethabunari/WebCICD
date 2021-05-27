@@ -22,22 +22,7 @@ pipeline {
     }
       
       
-      
-      
-       stage ('Check-Git-Secrets') {
-      steps {
-        sh 'rm trufflehog || true'
-        sh 'docker run gesellix/trufflehog --json https://github.com/securitis/CICD.git > trufflehog'
-        sh 'cat trufflehog'
-      }
-    }
-      
-      
-      
-      
-    }
- 
-    stage ('Check-Git-Secrets') {
+        stage ('Check-Git-Secrets') {
       steps {
         sh 'rm trufflehog || true'
         sh 'docker run gesellix/trufflehog --json https://github.com/securitis/CICD.git > trufflehog'
@@ -45,6 +30,11 @@ pipeline {
       }
     }
     
+      
+      
+    }
+ 
+  
     stage ('Source Composition Analysis') {
       steps {
          sh 'rm owasp* || true'
