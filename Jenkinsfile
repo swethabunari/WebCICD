@@ -42,9 +42,9 @@ pipeline {
     
          stage ('Appscan') {
       steps {
-                 appscan application: 'cb595860-1142-4fb9-95cb-eee3d7a0f33e', credentials: 'Abhilash_DevSecOps', name: 'test1', scanner: static_analyzer(hasOptions: false, target: 'http://10.109.137.30:8000/WebApp/#'), type: 'Static Analyzer'https://cloud.appscan.com/main/myapps/cb595860-1142-4fb9-95cb-eee3d7a0f33e
-
-        }
+            appscan application: 'cb595860-1142-4fb9-95cb-eee3d7a0f33e', credentials: 'Abhilash_DevSecOps', name: 'test1', scanner: static_analyzer(hasOptions: false, target: 'http://10.109.137.30:8000/WebApp/#'), type: 'Static Analyzer'
+            https://cloud.appscan.com/main/myapps/cb595860-1142-4fb9-95cb-eee3d7a0f33e
+       
       }
     }
     
