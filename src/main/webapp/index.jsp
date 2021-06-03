@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Santhosh Uriti Course</title>
+    <title>Santhosh Uriti CICD</title>
 
 
     <!-- Custom styles for this template -->
