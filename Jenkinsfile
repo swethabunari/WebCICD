@@ -10,7 +10,7 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
          }
     }
-      
+           
      stage ('Check-Git-Secrets') {
       steps {
         sh 'rm trufflehog || true'
