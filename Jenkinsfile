@@ -35,7 +35,7 @@ pipeline {
       }
     }
     
-     stage ('SAST') {
+    stage ('SAST') {
       steps {
         withSonarQubeEnv('sonar') {
           sh 'mvn sonar:sonar'
@@ -44,7 +44,13 @@ pipeline {
       }
     }
     
-     
+    stage ('SAST Appscan') {
+      steps {
+        appscan application: '4130440a-8227-4b5f-b846-e4ef704931fb', credentials: 'appscan', name: 'CICDDynamicTest', scanner: static_analyzer(hasOptions: false, target: '/var/lib/jenkins/workspace/CICD'), type: 'Static Analyzer'
+      }
+    }
+    
+       
     
     stage ('Build') {
       steps {
