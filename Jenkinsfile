@@ -19,7 +19,11 @@ pipeline {
       }
     }
     
- 
+     stage ('SpectreOS') {
+      steps {
+        sh 'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io $HOME/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD'
+      }
+    }
       
         
       
