@@ -17,14 +17,14 @@ pipeline {
                        
    
 
-    stage('install Spectral') {
+     stage('install Spectral') {
       steps {
-        sh 'curl -L https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN'
+        sh "curl -L "https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN" | sh"
       }
     }
     stage('scan for issues') {
       steps {
-        sh '$HOME/.spectral/spectral scan'
+        sh "$HOME/.spectral/spectral scan" 
       }
     }
   
