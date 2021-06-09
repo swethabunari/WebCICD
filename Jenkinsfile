@@ -3,6 +3,10 @@ pipeline {
   tools {
     maven 'Maven'
   }
+  environment {
+    SPECTRAL_DSN = credentials('spectral-dsn')
+  }
+  
   stages {
     stage ('Initialize') {
       steps {
@@ -12,10 +16,7 @@ pipeline {
     }
                        
    
-  environment {
-    SPECTRAL_DSN = credentials('spectral-dsn')
-  }
-  
+
     stage('install Spectral') {
       steps {
         sh 'curl -L https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN'
