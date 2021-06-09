@@ -15,7 +15,7 @@ pipeline {
   environment {
     SPECTRAL_DSN = credentials('spectral-dsn')
   }
-  stages {
+  
     stage('install Spectral') {
       steps {
         sh "curl -L "https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN" | sh"
@@ -26,7 +26,7 @@ pipeline {
         sh "$HOME/.spectral/spectral scan" 
       }
     }
-  }
+  
 
     
    /*  stage ('SpectreOS') {
