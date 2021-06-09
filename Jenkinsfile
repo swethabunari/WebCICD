@@ -24,7 +24,8 @@ pipeline {
     }
     stage('scan for issues') {
       steps {
-        sh 'HOME/.spectral/spectral scan' 
+         
+        sh "$HOME/.spectral/spectral scan" 
       }
     }
   
