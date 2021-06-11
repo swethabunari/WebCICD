@@ -99,7 +99,7 @@ pipeline {
          }
          stage('Archni'){  
                     steps {
-                           sh 'arachniScanner checks: '', format: 'html', url: 'http://10.109.137.24:9090/WebApp/'
+                           
                           } 
                       }
        }
