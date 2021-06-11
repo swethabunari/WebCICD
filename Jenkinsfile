@@ -99,7 +99,7 @@ pipeline {
          }
          stage('Archni'){  
                     steps {
-                           
+                           sh 'echo 123'
                           } 
                       }
        }
