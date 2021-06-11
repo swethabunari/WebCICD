@@ -16,7 +16,7 @@ pipeline {
     }
                        
    
-
+/*
      stage('install Spectral') {
       steps {
         sh 'curl -L https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN'
@@ -25,13 +25,13 @@ pipeline {
     stage('scan for issues') {
       steps {
          
-        /*sh "$HOME/.spectral/spectral scan" */
+        sh "$HOME/.spectral/spectral scan" */
        /* SPECTRAL_DSN="https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io" 'HOME/.spectral/spectral' github -k repo -t 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 'https://github.com/securitis/CICD.git' */
         sh 'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io /var/lib/jenkins/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD.git'
         /*sh 'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io /var/lib/jenkins/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD.git' */
       }
     }
-  
+  */
 
     
    /*  stage ('SpectreOS') {
@@ -91,11 +91,16 @@ pipeline {
     
 
     stage ('DAST Appscan') {
+       parallel {
       steps {
          appscan application: '4130440a-8227-4b5f-b846-e4ef704931fb', credentials: 'appscan', name: 'CICDDynamicTest', scanner: dynamic_analyzer(hasOptions: false, optimization: 'Fast', scanType: 'Staging', target: 'https://demo.testfire.net/'), type: 'Dynamic Analyzer'
        }
+      steps {
+         arachniScanner checks: '', format: 'html', url: 'http://10.109.137.24:9090/WebApp/'
+      } 
+         
     }
-
+    }
 
     
     
