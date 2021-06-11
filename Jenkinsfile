@@ -57,22 +57,26 @@ pipeline {
     }
     
     stage ('SAST') {
-      steps {
-        withSonarQubeEnv('sonar') {
-          sh 'mvn sonar:sonar'
-          sh 'cat target/sonar/report-task.txt'
-        }
-      }
-    }
+      parallel {
+        stage ('SonarQube') {     
+            steps {
+                withSonarQubeEnv('sonar') {
+                  sh 'mvn sonar:sonar'
+                  sh 'cat target/sonar/report-task.txt'
+                  }
+                 }
+              }
     
     stage ('SAST Appscan') {
       steps {
         appscan application: '4130440a-8227-4b5f-b846-e4ef704931fb', credentials: 'appscan', name: 'CICDDynamicTest', scanner: static_analyzer(hasOptions: false, target: '/var/lib/jenkins/workspace/CICD'), type: 'Static Analyzer'
       }
     }
-    
-       
-    
+   }
+   }    
+  
+  
+  
     stage ('Build') {
       steps {
       sh 'mvn clean package'
