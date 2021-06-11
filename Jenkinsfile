@@ -90,23 +90,21 @@ pipeline {
     }
     
 
-    stage ('DAST Appscan') {
+  stage ('DAST Appscan') {
        parallel {
          Stage('IBM Appscan'){
-      steps {
-         appscan application: '4130440a-8227-4b5f-b846-e4ef704931fb', credentials: 'appscan', name: 'CICDDynamicTest', scanner: dynamic_analyzer(hasOptions: false, optimization: 'Fast', scanType: 'Staging', target: 'https://demo.testfire.net/'), type: 'Dynamic Analyzer'
+                    steps {
+                           appscan application: '4130440a-8227-4b5f-b846-e4ef704931fb', credentials: 'appscan', name: 'CICDDynamicTest', scanner: dynamic_analyzer(hasOptions: false, optimization: 'Fast', scanType: 'Staging', target: 'https://demo.testfire.net/'), type: 'Dynamic Analyzer'
+                          }
+         }
+       Stage('Archni'){  
+                    steps {
+                           arachniScanner checks: '', format: 'html', url: 'http://10.109.137.24:9090/WebApp/'
+                          } 
+                      }
        }
-          Stage('Archni'){  
-      steps {
-         arachniScanner checks: '', format: 'html', url: 'http://10.109.137.24:9090/WebApp/'
-      } 
-     }
     }
-    }
-
+   
     
-    
-   }
-    
-  }
+  
      
