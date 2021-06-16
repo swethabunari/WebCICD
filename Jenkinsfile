@@ -5,6 +5,7 @@ pipeline {
   }
   environment {
     SPECTRAL_DSN = credentials('spectral-dsn')
+    container = docker
   }
   
   stages {
@@ -93,7 +94,8 @@ pipeline {
            }       
     }
     
-
+when {
+  environment ignoreCase: true, name: 'container', value: 'docker'
   stage ('DAST Appscan') {
        parallel {
          stage('IBM Appscan'){
@@ -109,6 +111,6 @@ pipeline {
        }
     }
    
-    
+}    
   }
 }  
