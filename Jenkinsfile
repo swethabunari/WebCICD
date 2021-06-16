@@ -100,7 +100,7 @@ pipeline {
 }    
      stage ('DAST Appscan') {
         when {
-            environment ignoreCase: true, name: 'container', value: 'no'   
+            environment ignoreCase: true, name: 'container', value: 'yes'   
       }
          parallel {
            stage('IBM Appscan'){
