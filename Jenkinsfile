@@ -6,6 +6,8 @@ pipeline {
   environment {
     SPECTRAL_DSN = credentials('spectral-dsn')
     container = 'docker'
+    spectral = 'spectral'
+    
   }
   
   stages {
@@ -15,7 +17,8 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
          }
     }
-                       
+    
+    
    
 /*
      stage('install Spectral') {
@@ -31,17 +34,20 @@ pipeline {
         sh 'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io /var/lib/jenkins/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD.git'
         sh 'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io /var/lib/jenkins/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD.git' 
       }
-    }
+    }*/
   
 
+    when {
+          environment ignoreCase: true, name: 'spectral', value: 'no'   
+         }
     
     stage ('SpectreOS') {
       steps {
         sh 'curl -L https://get.spectralops.io/latest/x/sh?key=spk-eb961bc3f3ae45b8aa2e92347150dbdb'    
         sh  'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io /home/spectral/ github -k repo -t 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 https://github.com/securitis/CICD.git'
-      }
-      SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io $HOME/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD.git
-    } */
+            }
+       SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io $HOME/.spectral/spectral github -k repo -t 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 https://github.com/securitis/CICD.git
+    } 
       
         
       
@@ -51,7 +57,7 @@ pipeline {
          sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
          sh 'chmod +x owasp-dependency-check.sh'
          sh 'bash owasp-dependency-check.sh'
-         sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
+         /*sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml' */
          sh 'sudo cp -r /var/lib/jenkins/OWASP-Dependency-Check/reports /var/lib/jenkins/workspace/CICD'
              
       }
@@ -93,7 +99,7 @@ pipeline {
 }    
      stage ('DAST Appscan') {
         when {
-            environment ignoreCase: true, name: 'container', value: 'no'   
+            environment ignoreCase: true, name: 'container', value: 'docker'   
       }
          parallel {
            stage('IBM Appscan'){
