@@ -75,15 +75,14 @@ pipeline {
     }
    }
    }    
-  
-  
-  
-    stage ('Build') {
+   
+   stage ('Build') {
       steps {
       sh 'mvn clean package'
        }
     }
-        
+when {
+  environment ignoreCase: true, name: 'container', value: 'docker'       
     stage ('Deploy-To-Apache') {
             steps {
                 sh 'chmod +777 /var/lib/jenkins/workspace/CICD/target/WebApp'
@@ -93,12 +92,10 @@ pipeline {
                
            }       
     }
-    
-when {
-  environment ignoreCase: true, name: 'container', value: 'docker'
-  stage ('DAST Appscan') {
-       parallel {
-         stage('IBM Appscan'){
+}    
+     stage ('DAST Appscan') {
+         parallel {
+           stage('IBM Appscan'){
                     steps {
                            appscan application: '4130440a-8227-4b5f-b846-e4ef704931fb', credentials: 'appscan', name: 'CICDDynamicTest', scanner: dynamic_analyzer(hasOptions: false, optimization: 'Fast', scanType: 'Staging', target: 'https://demo.testfire.net/'), type: 'Dynamic Analyzer'
                           }
@@ -110,7 +107,6 @@ when {
                       }
        }
     }
-   
-}    
+       
   }
 }  
