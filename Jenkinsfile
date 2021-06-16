@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
     SPECTRAL_DSN = credentials('spectral-dsn')
-    container = docker
+    container = 'docker'
   }
   
   stages {
