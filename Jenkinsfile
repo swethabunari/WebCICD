@@ -42,9 +42,14 @@ pipeline {
        /* when {
           environment ignoreCase: true, name: 'spectral', value: 'no'   
              } */
-       when {
+       /*when {
             tag comparator: 'EQUALS', pattern: 'webapp'
+            } */
+       when {
+            branch comparator: 'EQUALS', pattern: 'master'
             }
+
+      
       steps {
         sh 'curl -L https://get.spectralops.io/latest/x/sh?key=spk-eb961bc3f3ae45b8aa2e92347150dbdb'    
         sh  'SPECTRAL_DSN=https://spk-eb961bc3f3ae45b8aa2e92347150dbdb@get.spectralops.io /home/spectral/ github -k repo -t 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 https://github.com/securitis/CICD.git'
