@@ -46,7 +46,7 @@ pipeline {
             tag comparator: 'EQUALS', pattern: 'webapp'
             } */
        when {
-            branch comparator: 'EQUALS', pattern: 'master'
+            branch comparator: 'EQUALS', pattern: 'master1'
             }
 
       
